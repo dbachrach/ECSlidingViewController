@@ -617,9 +617,9 @@
     
     [self beginAppearanceTransitionForOperation:operation];
     
-    [self.defaultAnimationController setValue:self.coordinatorAnimations forKey:@"coordinatorAnimations"];
-    [self.defaultAnimationController setValue:self.coordinatorCompletion forKey:@"coordinatorCompletion"];
-    [self.defaultInteractiveTransition setValue:self.coordinatorInteractionEnded forKey:@"coordinatorInteractionEnded"];
+    [(id)self.currentAnimationController setValue:self.coordinatorAnimations forKey:@"coordinatorAnimations"];
+    [(id)self.currentAnimationController setValue:self.coordinatorCompletion forKey:@"coordinatorCompletion"];
+    [(id)self.currentInteractiveTransition setValue:self.coordinatorInteractionEnded forKey:@"coordinatorInteractionEnded"];
     
     if ([self isInteractive]) {
         [self.currentInteractiveTransition startInteractiveTransition:self];
