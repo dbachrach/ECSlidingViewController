@@ -45,6 +45,7 @@
 @property (nonatomic, copy) void (^animationComplete)();
 @property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
+@property (nonatomic, copy) void (^coordinatorCancelation)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 - (void)setup;
 
@@ -619,6 +620,7 @@
     
     [(id)self.currentAnimationController setValue:self.coordinatorAnimations forKey:@"coordinatorAnimations"];
     [(id)self.currentAnimationController setValue:self.coordinatorCompletion forKey:@"coordinatorCompletion"];
+    [(id)self.currentAnimationController setValue:self.coordinatorCancelation forKey:@"coordinatorCancelation"];
     [(id)self.currentInteractiveTransition setValue:self.coordinatorInteractionEnded forKey:@"coordinatorInteractionEnded"];
     
     if ([self isInteractive]) {
@@ -854,6 +856,7 @@
     _isInteractive                   = NO;
     self.coordinatorAnimations       = nil;
     self.coordinatorCompletion       = nil;
+    self.coordinatorCancelation      = nil;
     self.coordinatorInteractionEnded = nil;
     self.currentAnimationPercentage  = 0;
     self.currentOperation            = ECSlidingViewControllerOperationNone;
@@ -927,6 +930,16 @@
                         completion:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))completion {
     self.coordinatorAnimations = animation;
     self.coordinatorCompletion = completion;
+    return YES;
+}
+
+- (BOOL)animateAlongsideTransition:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))animation
+                        completion:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))completion
+                       cancelation:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))cancelation
+{
+    self.coordinatorAnimations = animation;
+    self.coordinatorCompletion = completion;
+    self.coordinatorCancelation = cancelation;
     return YES;
 }
 

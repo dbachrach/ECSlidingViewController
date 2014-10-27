@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
 /**
  Used to create a percent-driven interactive transition. Analogous to `UIPercentDrivenInteractiveTransition` except that it is compatible with `ECSlidingViewController`.
@@ -36,7 +37,7 @@
 /**
  The animator object that will be percent-driven. The animation will be triggered when the interactive transition is triggered, but instead of playing from start to finish it will be controlled by the calls to `updateInteractiveTransition:`, `cancelInteractiveTransition`, and `finishInteractiveTransition`.
  */
-@property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> animationController;
+@property (nonatomic, strong) id<ECViewControllerAnimatedTransitioning> animationController;
 
 /**
  The amount of the transition (specified as a percentage of the overall duration) that is complete.

@@ -92,6 +92,14 @@
                         layoutControllerForTopViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition;
 @end
 
+@protocol ECViewControllerAnimatedTransitioning <UIViewControllerAnimatedTransitioning>
+
+@optional
+
+- (void)cancelationComplete:(id<UIViewControllerContextTransitioning>)transitionContext;
+
+@end
+
 /**
  `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
  
@@ -242,6 +250,10 @@
  @param complete A completion handler.
  */
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete;
+
+- (BOOL)animateAlongsideTransition:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))animation
+                        completion:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))completion
+                       cancelation:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))cancelation;
 
 
 ///--------------------------------------

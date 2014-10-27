@@ -105,6 +105,9 @@
         CALayer *layer = [self.transitionContext containerView].layer;
         [layer removeAllAnimations];
         layer.speed = 1.0;
+        if ([self.animationController respondsToSelector:@selector(cancelationComplete:)]) {
+            [self.animationController cancelationComplete:self.transitionContext];
+        }
     }
 }
 
