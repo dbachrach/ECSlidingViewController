@@ -27,6 +27,7 @@
 @interface ECSlidingAnimationController ()
 @property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
+@property (nonatomic, copy) void (^coordinatorCancelation)(id<UIViewControllerTransitionCoordinatorContext>context);
 @end
 
 @implementation ECSlidingAnimationController
